@@ -1,7 +1,10 @@
 package org.ashsethu.controller;
 
 import org.ashsethu.config.Config;
+import org.ashsethu.repository.PageRepository;
 import org.ashsethu.service.CrawlerService;
+import org.ashsethu.service.OutputService;
+import org.ashsethu.utils.DomainUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +24,18 @@ public class CrawlerController {
     @Autowired
     Config cfg ;
 
+    @Autowired
+    private OutputService outputService;
+
     @GetMapping(value = "/startCrawling")
     public String startCrawling(@RequestParam(value = "startingUrl") String startingUrl) throws IOException {
-        csil.crawlTheWeb(startingUrl);
+
+        String baseDomain = DomainUtility.extractBaseDomain(startingUrl);
+        PageRepository pageRepository = csil.crawlTheWeb(startingUrl, baseDomain);
+
+        //Wrrite output
+        outputService.createOutput(pageRepository.getAllPages(), pageRepository.getAllImages(), baseDomain);
+
         return "Successfully Crawled. Output is available in the file " + cfg.getCrawlerOutput();
     }
 }

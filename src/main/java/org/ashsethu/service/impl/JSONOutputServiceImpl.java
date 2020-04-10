@@ -1,6 +1,6 @@
 package org.ashsethu.service.impl;
 
-import org.ashsethu.config.SessionConfigFactory;
+
 import org.ashsethu.constants.Constants;
 import org.ashsethu.service.OutputService;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class JSONOutputServiceImpl implements OutputService {
 
     @Override
-    public void createOutput(ArrayList<String> linkList, ArrayList<String> imageList) {
+    public void createOutput(ArrayList<String> linkList, ArrayList<String> imageList, String baseDomain) {
 
 
         ArrayList<String> internalLinks = new ArrayList<String>();
@@ -29,7 +29,7 @@ public class JSONOutputServiceImpl implements OutputService {
 
             String url = links[links.length - 1];
 
-            if (url.contains(SessionConfigFactory.getSessionConfig().getBaseDomain())) {
+            if (url.contains(baseDomain)) {
 
                 internalLinks.add(url);
 
@@ -47,7 +47,7 @@ public class JSONOutputServiceImpl implements OutputService {
             System.out.println(url);
 
 
-            if (url.contains(SessionConfigFactory.getSessionConfig().getBaseDomain())) {
+            if (url.contains(baseDomain)) {
 
                 internalImages.add(url);
 

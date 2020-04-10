@@ -18,11 +18,11 @@ public interface PageRepository {
 
     public  String  popFromCrawList();
 
-    public  void  print();
-
     public  void initiateCrawlList(String startingURL);
 
     public ArrayList<String> getAllPages();
+
+    public ArrayList<String> getAllCrawlPages();
 
     public ArrayList<String> getAllImages();
 }

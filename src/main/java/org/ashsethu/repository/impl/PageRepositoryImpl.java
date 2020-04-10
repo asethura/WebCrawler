@@ -53,6 +53,9 @@ public class PageRepositoryImpl implements PageRepository {
     }
 
     public void initiateCrawlList(String startingURL) {
+        toBeCrawledList = new ArrayList<String>();
+        pageKeyList = new ArrayList<String>();
+        imageKeyList = new ArrayList<String>();
         toBeCrawledList.add(startingURL);
     }
 
@@ -62,12 +65,14 @@ public class PageRepositoryImpl implements PageRepository {
     }
 
     @Override
+    public ArrayList<String> getAllCrawlPages() {
+        return toBeCrawledList;
+    }
+
+    @Override
     public ArrayList<String> getAllImages() {
         return imageKeyList;
     }
 
-    public void print(){
-        System.out.println(pageKeyList.toString());
-        System.out.println(imageKeyList.toString());
-    }
+
 }

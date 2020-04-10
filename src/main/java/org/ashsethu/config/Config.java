@@ -18,9 +18,6 @@ public class Config {
     @Value("${crawler.external}")
     private boolean allowExternal;
 
-    @Value("${crawler.starting.url}")
-    private String startingUrl;
-
     @Value("${crawler.output}")
     private String crawlerOutput;
 
@@ -55,15 +52,6 @@ public class Config {
     public void setAllowExternal(boolean allowExternal) {
         this.allowExternal = allowExternal;
     }
-
-    public String getStartingUrl() {
-        return startingUrl;
-    }
-
-    public void setStartingUrl(String startingUrl) {
-        this.startingUrl = startingUrl;
-    }
-
 
     public String getCrawlerOutput() {
         return crawlerOutput;
