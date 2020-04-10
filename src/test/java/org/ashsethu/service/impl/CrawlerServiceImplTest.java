@@ -88,27 +88,4 @@ class CrawlerServiceImplTest {
     }
 
 
-    void crawlTheWeb_AllowExternal_Test() throws IOException {
-        cfg.setAllowExternal(true);
-        cfg.setMaxPages(1000);
-        cfg.setMaxDepth(2);
-
-        PageRepository pageRepository = csil.crawlTheWeb("https://asethura.wixsite.com/techfortech", "asethura.wixsite.com");
-        ArrayList<String> pages = pageRepository.getAllPages();
-
-        System.out.println(" Pages " + pages);
-
-        for (String record : pages) {
-            String[] records = record.split(Constants.KEY_SEPARATOR);
-
-            String lastButOneRecord = records[records.length - 2];
-
-            if (!lastButOneRecord.contains("asethura.wixsite.com")){//if contains domain other than asethura.wixsite.com then it crawls external
-                System.out.println(record);
-                assert(true);
-                return;
-            }
-        }
-        assert (false);//if not asserted true, then assert false
-    }
 }
