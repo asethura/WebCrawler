@@ -5,5 +5,5 @@ import org.json.simple.JSONObject;
 import java.io.IOException;
 
 public interface CrawlerService {
-    public  void crawlTheWeb() throws IOException;
+    public  void crawlTheWeb(String startingUrl) throws IOException;
 }

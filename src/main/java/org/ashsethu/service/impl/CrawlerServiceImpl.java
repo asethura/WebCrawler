@@ -32,7 +32,7 @@ public class CrawlerServiceImpl implements CrawlerService {
     @Autowired
     Config cfg ;
 
-    public void crawlTheWeb() throws IOException {
+    public void crawlTheWeb(String startingURL) throws IOException {
 
         String url = null;
         String key = null;
@@ -44,7 +44,7 @@ public class CrawlerServiceImpl implements CrawlerService {
         int maxPages = cfg.getMaxPages();
         int depth = cfg.getMaxDepth();
         int threadCount = cfg.getMaxThread();
-        String startingURL = cfg.getStartingUrl();
+        //String startingURL = cfg.getStartingUrl();
 
         //if starting url does not have protocol, add the same
         startingURL = !startingURL.startsWith("http")?"http://"+startingURL:startingURL;

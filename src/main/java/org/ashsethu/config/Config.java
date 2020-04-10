@@ -21,6 +21,9 @@ public class Config {
     @Value("${crawler.starting.url}")
     private String startingUrl;
 
+    @Value("${crawler.output}")
+    private String crawlerOutput;
+
     public int getMaxThread() {
         return maxThread;
     }
@@ -62,5 +65,11 @@ public class Config {
     }
 
 
+    public String getCrawlerOutput() {
+        return crawlerOutput;
+    }
 
+    public void setCrawlerOutput(String crawlerOutput) {
+        this.crawlerOutput = crawlerOutput;
+    }
 }
