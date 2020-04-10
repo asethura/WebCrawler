@@ -29,8 +29,8 @@ public class HtmlParser {
 
             return linksOnPage;
         }catch(HttpStatusException he){
-            logger.debug(he.toString());
-            logger.debug("Page not reachable " + URL);
+            logger.warn(he.toString());
+            logger.warn("Page not reachable " + URL);
         }
         return null;
     }

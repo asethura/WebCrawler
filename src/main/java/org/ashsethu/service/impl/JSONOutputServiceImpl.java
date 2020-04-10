@@ -44,7 +44,6 @@ public class JSONOutputServiceImpl implements OutputService {
             String images[] = record.split(Constants.KEY_SEPARATOR);
 
             String url = images[images.length - 1];
-            System.out.println(url);
 
 
             if (url.contains(baseDomain)) {

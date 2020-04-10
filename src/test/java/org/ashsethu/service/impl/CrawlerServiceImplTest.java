@@ -1,11 +1,15 @@
 package org.ashsethu.service.impl;
 
+
 import org.ashsethu.config.Config;
 import org.ashsethu.constants.Constants;
 import org.ashsethu.repository.PageRepository;
 import org.ashsethu.service.CrawlerService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import static org.mockito.Mockito.*;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,8 +30,11 @@ class CrawlerServiceImplTest {
     @Autowired
     Config cfg;
 
+
+
     @Test
     void crawlTheWeb_MaxDepth_Test() throws IOException {
+
         cfg.setAllowExternal(true);
         cfg.setMaxDepth(1);
         PageRepository pageRepository = csil.crawlTheWeb("http://wiprodigital.com", "wiprodigital.com");
@@ -70,8 +77,6 @@ class CrawlerServiceImplTest {
         PageRepository pageRepository = csil.crawlTheWeb("https://asethura.wixsite.com/techfortech", "asethura.wixsite.com");
         ArrayList<String> pages = pageRepository.getAllPages();
 
-        System.out.println(" Pages " + pages);
-
         for (String record : pages) {
 
             String[] records = record.split(Constants.KEY_SEPARATOR);
@@ -79,7 +84,6 @@ class CrawlerServiceImplTest {
             String lastButOneRecord = records[records.length - 2];
 
             if (!lastButOneRecord.contains("asethura.wixsite.com")){
-                System.out.println(record);
                 assert(false);
                 return;
             }

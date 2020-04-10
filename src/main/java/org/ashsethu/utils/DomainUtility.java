@@ -32,7 +32,7 @@ public class DomainUtility {
 
     public static String extractBaseDomain(String url) {
         //match pattern for base domain and return
-        System.out.println(url);
+
         Pattern pattern = Pattern.compile("(http://|https://)?(www\\.)?(.*)");
         Matcher matcher = pattern.matcher(url);
         if (matcher.find()){

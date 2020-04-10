@@ -51,7 +51,6 @@ public class CrawlerServiceImpl implements CrawlerService {
 
         pageRepository.initiateCrawlList(startingURL);
 
-        System.out.println(maxPages);
 
         while (pageRepository.getCrawlListCount() > 0 ) {
 
