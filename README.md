@@ -13,7 +13,7 @@ This is a java code sample for a Web crawler. It starts with a seeder url passed
 ## Optional parameters that can be set to control the crawling
 4. These parameters can be set in application.properties before packaging or can be passed as java command line options
 crawler.depth.max=2  
-crawler.page.max=100
-crawler.external=true
-crawler.output=crawlMap.dat
+crawler.page.max=100 
+crawler.external=true 
+crawler.output=crawlMap.dat  
 
