@@ -1,8 +1,5 @@
 target/**
-target
-/target/*
-/target
-
+crawlMap.dat
 
 ### STS ###
 .classpath
