@@ -13,15 +13,15 @@ java -jar target/WebCrawler*.jar
 ## Optional parameters that can be set to control the crawling
 These parameters can be set in application.properties before packaging or can be passed as java command line options (ex. -Dcrawler.depth.max=2 )
 
-Crawler depth limits the number of levels in the crawling tree
+Crawler depth limits the number of levels in the crawling tree  
 crawler.depth.max=2  
 
-Maximum number of pages crawled
+Maximum number of pages crawled  
 crawler.page.max=100  
 
-Set below property to false if external sites should not be crawled. Crawling will limit to domain of the seeder url 
+Set below property to false if external sites should not be crawled. Crawling will limit to domain of the seeder url   
 crawler.external=true  
 
-Crawling output
+Crawling output  
 crawler.output=crawlMap.dat  
 
