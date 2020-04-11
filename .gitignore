@@ -1,0 +1,14 @@
+target/**
+target
+/target/*
+/target
+
+
+### STS ###
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.DS_Store
+.idea

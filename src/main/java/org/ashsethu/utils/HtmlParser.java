@@ -7,15 +7,16 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-
+@Component
 public class HtmlParser {
 
-    protected static final Logger logger = LoggerFactory.getLogger(HtmlParser.class);
+    protected final Logger logger = LoggerFactory.getLogger(HtmlParser.class);
 
-    public static Elements getLinks(String URL) throws IOException {
+    public Elements getLinks(String URL) throws IOException {
 
         //1. Fetch the HTML code
         try{
@@ -35,7 +36,7 @@ public class HtmlParser {
         return null;
     }
 
-    public static Elements getImages(String URL) throws IOException {
+    public  Elements getImages(String URL) throws IOException {
 
         //1. Fetch the image
         try{

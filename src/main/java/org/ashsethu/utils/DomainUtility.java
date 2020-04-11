@@ -1,12 +1,15 @@
 package org.ashsethu.utils;
 
+import org.springframework.stereotype.Component;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Component
 public class DomainUtility {
 
     //Validate url. If not return null. If valid and not well formed, fix it
-    public static String validateAndFormURL(String url, String baseUrl) {
+    public  String validateAndFormURL(String url, String baseUrl) {
 
         //check if url starts with http. If so, return url as such
         if (url.startsWith("http")) {
@@ -21,7 +24,7 @@ public class DomainUtility {
     }
 
     //check if same domain or not
-    public static boolean checkBaseDomain(String url, String baseDomain) {
+    public  boolean checkBaseDomain(String url, String baseDomain) {
 
         if (url.contains(baseDomain)) {
             return true;
@@ -30,7 +33,7 @@ public class DomainUtility {
     }
 
 
-    public static String extractBaseDomain(String url) {
+    public  String extractBaseDomain(String url) {
         //match pattern for base domain and return
 
         Pattern pattern = Pattern.compile("(http://|https://)?(www\\.)?(.*)");
@@ -41,7 +44,7 @@ public class DomainUtility {
         return null;
     }
 
-    public static String stripQueryString(String url) {
+    public  String stripQueryString(String url) {
         //match pattern for query Sting and strip
 
         String baseUrl = url.split("\\?")[0];

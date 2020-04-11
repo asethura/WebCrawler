@@ -28,6 +28,13 @@ public class CrawlerServiceImpl implements CrawlerService {
     @Autowired
     Config cfg;
 
+    @Autowired
+    HtmlParser htmlParser;
+
+    @Autowired
+    DomainUtility domainUtility;
+
+
     public PageRepository crawlTheWeb(String startingURL, String baseDomain) throws IOException {
 
         String url = null;
@@ -40,13 +47,10 @@ public class CrawlerServiceImpl implements CrawlerService {
         int maxPages = cfg.getMaxPages();
         int depth = cfg.getMaxDepth();
         int threadCount = cfg.getMaxThread();
-
+        boolean allowExternalCrawl = cfg.isAllowExternal();
 
         //if starting url does not have protocol, add the same
         startingURL = !startingURL.startsWith("http") ? "http://" + startingURL : startingURL;
-
-
-        boolean allowExternalCrawl = cfg.isAllowExternal();
 
 
         pageRepository.initiateCrawlList(startingURL);
@@ -67,9 +71,9 @@ public class CrawlerServiceImpl implements CrawlerService {
             if (arrSize <= depth) {
 
                 //Get Links
-                Elements elements = HtmlParser.getLinks(url);
+                Elements elements = htmlParser.getLinks(url);
 
-                String baseUrl = DomainUtility.stripQueryString(url);
+                String baseUrl = domainUtility.stripQueryString(url);
 
 
                 if (elements != null) {
@@ -77,7 +81,7 @@ public class CrawlerServiceImpl implements CrawlerService {
 
                         String childUrl = element.attr("href");
 
-                        String pageUrl = DomainUtility.validateAndFormURL(childUrl, baseUrl);
+                        String pageUrl = domainUtility.validateAndFormURL(childUrl, baseUrl);
 
                         if (pageUrl != null && pageRepository.getPageListCount() < maxPages) {
 
@@ -86,18 +90,18 @@ public class CrawlerServiceImpl implements CrawlerService {
                             //Don't add if max page is reached
 
                             //check if external crawl is allowed. If not and this is an external link, do not add to crawl list
-                            if (allowExternalCrawl && DomainUtility.checkBaseDomain(pageUrl, baseDomain)) {
+                            if (allowExternalCrawl && domainUtility.checkBaseDomain(pageUrl, baseDomain)) {
                                 pageRepository.addToBeCrawledList(key, pageUrl);
                             }
                         }
 
                     }
                 }
-                Elements images = HtmlParser.getImages(url);
+                Elements images = htmlParser.getImages(url);
                 if (images != null) {
                     for (Element image : images) {
                         String childUrl = image.attr("src");
-                        String imageUrl = DomainUtility.validateAndFormURL(childUrl, baseUrl);
+                        String imageUrl = domainUtility.validateAndFormURL(childUrl, baseUrl);
                         if (imageUrl != null) {
                             pageRepository.addToImageKeyList(key, imageUrl);
                         }

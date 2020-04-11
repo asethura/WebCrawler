@@ -5,13 +5,24 @@ import org.ashsethu.config.Config;
 import org.ashsethu.constants.Constants;
 import org.ashsethu.repository.PageRepository;
 import org.ashsethu.service.CrawlerService;
+import org.ashsethu.utils.DomainUtility;
+import org.ashsethu.utils.HtmlParser;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import static org.mockito.Mockito.*;
+//import static org.powermock.api.mockito.PowerMockito.*;
+
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+//import org.powermock.core.classloader.annotations.PrepareForTest;
+//import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -20,17 +31,49 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-class CrawlerServiceImplTest {
+class CrawlerServiceImplTest{
 
     @Autowired
-    CrawlerService csil;
+    CrawlerServiceImpl csil;
 
     @Autowired
     Config cfg;
 
+    @MockBean
+    Config mcfg;
 
+
+    @MockBean
+    HtmlParser mhtmlParser;
+
+
+    @Test
+    void crawlTheWeb_Max_Depth_Test() throws IOException {
+
+        when(mcfg.isAllowExternal()).thenReturn(true);
+        when(mcfg.getMaxDepth()).thenReturn(1);
+        when(mcfg.getMaxPages()).thenReturn(10);
+
+        when(mhtmlParser.getLinks(Mockito.any())).thenReturn(createElementList());
+
+        PageRepository pageRepository = csil.crawlTheWeb("http://wiprodigital.com", "wiprodigital.com");
+
+        assertNotNull(pageRepository);
+
+        assertEquals(2, pageRepository.getPageListCount());
+
+    }
+
+    private Elements createElementList(){
+        Element el1 = new Element("html").attr("href", "http://linkedin.com");
+        Element el2 = new Element("html").attr("href", "http://twitter.com");
+        Elements els = new Elements();
+        els.add(el1);
+        els.add(el2);
+        return els;
+    }
 
     @Test
     void crawlTheWeb_MaxDepth_Test() throws IOException {

@@ -27,10 +27,13 @@ public class CrawlerController {
     @Autowired
     private OutputService outputService;
 
+    @Autowired
+    DomainUtility domainUtility;
+
     @GetMapping(value = "/startCrawling")
     public String startCrawling(@RequestParam(value = "startingUrl") String startingUrl) throws IOException {
 
-        String baseDomain = DomainUtility.extractBaseDomain(startingUrl);
+        String baseDomain = domainUtility.extractBaseDomain(startingUrl);
         PageRepository pageRepository = csil.crawlTheWeb(startingUrl, baseDomain);
 
         //Wrrite output
