@@ -5,6 +5,7 @@ This is a java code sample for a Web crawler. It starts with a seeder url passed
 git clone https://github.com/asethura/WebCrawler.git
 
 ## Build package
+cd WebCrawler
 mvn package
 
 ## Run the jar file
@@ -23,5 +24,16 @@ Set below property to false if external sites should not be crawled. Crawling wi
 crawler.external=true  
 
 Crawling output  
-crawler.output=crawlMap.dat  
+crawler.output=crawlMap.dat
 
+Port at which API listens
+server.port=8089
+
+## To start the crawl, pass the seeder url as part of query strin like shown below
+http://localhost:8089/startCrawling?startingUrl=http://example.com
+
+## BDD and API Tests
+Once the api is started, you can run the BDD Tests and API Test by cloning below repo
+git clone https://github.com/asethura/BDD_API_Tests.git
+cd BDD_API_Tests
+mvn tets

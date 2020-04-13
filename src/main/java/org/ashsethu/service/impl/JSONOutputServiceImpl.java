@@ -2,6 +2,7 @@ package org.ashsethu.service.impl;
 
 
 import org.ashsethu.constants.Constants;
+import org.ashsethu.model.*;
 import org.ashsethu.service.OutputService;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class JSONOutputServiceImpl implements OutputService {
 
     @Override
-    public void createOutput(ArrayList<String> linkList, ArrayList<String> imageList, String baseDomain) {
+    public Response createOutput(ArrayList<String> linkList, ArrayList<String> imageList, String baseDomain) {
 
 
         ArrayList<String> internalLinks = new ArrayList<String>();
@@ -56,39 +57,57 @@ public class JSONOutputServiceImpl implements OutputService {
 
         }
 
+        ExternalImages ei = new ExternalImages();
+        ExternalLinks el = new ExternalLinks();
+        InternalLinks il = new InternalLinks();
+        InternalImages ii = new InternalImages();
+        Response resp = new Response();
 
         try (FileWriter file = new FileWriter("crawlMap.dat")) {
             file.write("Internal Links:\n");
 
 
             for (String record : internalLinks) {
+                il.addUrl(new URL(record));
                 file.write(record + "\n");
             }
 
             file.write("\n");
             file.write("External Links:\n");
+
             for (String record : externalLinks) {
+                el.addUrl(new URL(record));
                 file.write(record + "\n");
             }
 
             file.write("\n");
             file.write("Internal Images:\n");
             for (String record : internalImages) {
+                ii.addUrl(new URL(record));
                 file.write(record + "\n");
             }
 
             file.write("\n");
             file.write("External Images:\n");
             for (String record : externalImages) {
+                ei.addUrl(new URL(record));
+
                 file.write(record + "\n");
             }
             file.flush();
+
+            resp.setExternal_images(ei);
+            resp.setExternal_links(el);
+            resp.setInternal_images(ii);
+            resp.setInternal_links(il);
+
+
 
         } catch (IOException e) {
             e.printStackTrace();
 
         }
+        return resp;
     }
-
 
 }

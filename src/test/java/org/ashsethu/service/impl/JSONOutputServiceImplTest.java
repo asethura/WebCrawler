@@ -1,6 +1,7 @@
 package org.ashsethu.service.impl;
 
 import org.ashsethu.config.Config;
+import org.ashsethu.model.Response;
 import org.ashsethu.repository.PageRepository;
 import org.ashsethu.service.CrawlerService;
 import org.ashsethu.service.OutputService;

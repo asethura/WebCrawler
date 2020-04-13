@@ -1,6 +1,7 @@
 package org.ashsethu.controller;
 
 import org.ashsethu.config.Config;
+import org.ashsethu.model.Response;
 import org.ashsethu.repository.PageRepository;
 import org.ashsethu.service.CrawlerService;
 import org.ashsethu.service.OutputService;
@@ -31,14 +32,14 @@ public class CrawlerController {
     DomainUtility domainUtility;
 
     @GetMapping(value = "/startCrawling")
-    public String startCrawling(@RequestParam(value = "startingUrl") String startingUrl) throws IOException {
+    public Response startCrawling(@RequestParam(value = "startingUrl") String startingUrl) throws IOException {
 
         String baseDomain = domainUtility.extractBaseDomain(startingUrl);
         PageRepository pageRepository = csil.crawlTheWeb(startingUrl, baseDomain);
 
         //Wrrite output
-        outputService.createOutput(pageRepository.getAllPages(), pageRepository.getAllImages(), baseDomain);
+        Response resp = outputService.createOutput(pageRepository.getAllPages(), pageRepository.getAllImages(), baseDomain);
 
-        return "Successfully Crawled. Output is available in the file " + cfg.getCrawlerOutput();
+        return resp;
     }
 }
