@@ -21,19 +21,19 @@ Maximum number of pages crawled
 crawler.page.max=100  
 
 Set below property to false if external sites should not be crawled. Crawling will limit to domain of the seeder url   
-crawler.external=true  
+crawler.external=true    
 
 Crawling output  
-crawler.output=crawlMap.dat
+crawler.output=crawlMap.dat  
 
-Port at which API listens
-server.port=8089
+Port at which API listens  
+server.port=8089  
 
-## To start the crawl, pass the seeder url as part of query strin like shown below
-http://localhost:8089/startCrawling?startingUrl=http://example.com
+## To start the crawl, pass the seeder url as part of query strin like shown below  
+http://localhost:8089/startCrawling?startingUrl=http://example.com  
 
-## BDD and API Tests
-Once the api is started, you can run the BDD Tests and API Test by cloning below repo
-git clone https://github.com/asethura/BDD_API_Tests.git
-cd BDD_API_Tests
-mvn tets
+## BDD and API Tests  
+Once the api is started, you can run the BDD Tests and API Test by cloning below repo  
+git clone https://github.com/asethura/BDD_API_Tests.git  
+cd BDD_API_Tests  
+mvn test  
